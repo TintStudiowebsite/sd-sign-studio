@@ -151,7 +151,12 @@ export default function Navbar() {
             <img 
               src="/images/logo.png" 
               alt="SD Sign Studio" 
-              style={{ width: '80px', height: '80px', borderRadius: '50%', objectFit: 'cover' }} 
+              className="logo-img-desktop"
+            />
+            <img 
+              src="/images/client-images/Navbar-horizontal.jpeg" 
+              alt="SD Sign Studio" 
+              className="logo-img-mobile"
             />
           </Link>
           <div className="nav-links">

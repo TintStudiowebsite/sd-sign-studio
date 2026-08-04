@@ -105,7 +105,7 @@ export default function HeroSection() {
       <section id="hero" style={{ background: '#ffffff', display: 'flex', flexDirection: 'column', paddingTop: 'var(--nav-h)' }}>
 
         {/* Full-width mobile media */}
-        <div style={{ padding: 0 }}>
+        <div style={{ position: 'relative', padding: '0 0 14px' }}>
           <div
             style={{
               position: 'relative',
@@ -168,6 +168,20 @@ export default function HeroSection() {
               )
             })}
           </div>
+
+          {/* Eyebrow badge — overlaps the media edge */}
+          <div style={{
+            position: 'absolute', left: '50%', bottom: '14px', zIndex: 11,
+            transform: 'translate(-50%, 50%)',
+            display: 'inline-flex', alignItems: 'center', gap: '6px',
+            background: '#fff', border: '1px solid rgba(232,0,13,0.2)',
+            color: 'var(--red)', borderRadius: '20px', padding: '5px 14px',
+            fontSize: 'clamp(8px, 2.5vw, 10px)', fontWeight: 800,
+            letterSpacing: 'clamp(1px, 0.4vw, 2px)', textTransform: 'uppercase',
+            whiteSpace: 'nowrap', boxShadow: '0 4px 12px rgba(0,0,0,0.12)'
+          }}>
+            ⚡ Signage &amp; Vehicle Branding Studio
+          </div>
         </div>
 
         {/* Slide dots */}
@@ -190,18 +204,6 @@ export default function HeroSection() {
 
         {/* Content */}
         <div style={{ display: 'flex', flexDirection: 'column', padding: '16px 20px 20px' }}>
-
-          {/* Eyebrow badge */}
-          <div style={{
-            display: 'inline-flex', alignItems: 'center', gap: '6px',
-            background: 'rgba(232,0,13,0.07)', border: '1px solid rgba(232,0,13,0.2)',
-            color: 'var(--red)', borderRadius: '20px', padding: '5px 14px',
-            fontSize: '10px', fontWeight: 800, letterSpacing: '2px', textTransform: 'uppercase',
-            marginBottom: '14px', alignSelf: 'flex-start'
-          }}>
-            ⚡ Signage &amp; Vehicle Branding Studio
-          </div>
-
           {/* Headline — dark, bold, title case */}
           <h1 style={{
             fontWeight: 900,
