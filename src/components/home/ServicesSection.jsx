@@ -33,16 +33,16 @@ export default function ServicesSection() {
               >
                 <div className="srv-media">
                   <img className="srv-img" src={srv.image} alt={srv.title} loading="lazy" />
-                </div>
-                {srv.popular && (
-                  <span className="srv-popular" aria-hidden="true">
-                    <Star size={12} fill="currentColor" strokeWidth={0} />
-                    Popular
+                  {srv.popular && (
+                    <span className="srv-popular" aria-hidden="true">
+                      <Star size={12} fill="currentColor" strokeWidth={0} />
+                      Popular
+                    </span>
+                  )}
+                  <span className="srv-badge" aria-hidden="true">
+                    <Icon size={22} strokeWidth={2} />
                   </span>
-                )}
-                <span className="srv-badge" aria-hidden="true">
-                  <Icon size={22} strokeWidth={2} />
-                </span>
+                </div>
                 <div className="srv-content">
                   <h3 className="srv-title">{srv.title}</h3>
                   <p className="srv-desc">{srv.short_description || srv.description}</p>
