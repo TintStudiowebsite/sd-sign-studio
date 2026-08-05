@@ -44,8 +44,11 @@
 @media (min-width: 961px) {
   .nav-inner { display: flex !important; }
 }
+@media (min-width: 1201px) {
+  .nav-logo { transform: translateX(calc((1200px - 100vw) / 4)); }
+}
 .nav-logo { display: flex; align-items: center; gap: 0; }
-.logo-img-desktop { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; }
+.logo-img-desktop { width: clamp(140px, 15vw, 190px); height: auto; object-fit: contain; }
 .logo-img-mobile { display: none; }
 .logo-sd {
   font-size: 30px; font-weight: 900; letter-spacing: -1px; line-height: 1;
@@ -579,11 +582,11 @@
   margin-top: 8px; background: var(--red);
 }
 .srv-desc {
-  font-size: 13px; color: #68707c; line-height: 1.62; margin-bottom: 20px; flex-grow: 1;
+  font-size: 14px; color: #68707c; line-height: 1.62; margin-bottom: 20px; flex-grow: 1;
 }
 .srv-link {
   display: inline-flex; align-items: center; align-self: flex-start; gap: 6px;
-  color: var(--red); font-size: 13px; font-weight: 700; line-height: 1.3;
+  color: var(--red); font-size: 15px; font-weight: 700; line-height: 1.3;
 }
 .srv-link-arrow { transition: transform 0.2s ease; }
 .srv-card:hover .srv-link-arrow { transform: translateX(3px); }

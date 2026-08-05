@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom'
+import { Navigate, Routes, Route } from 'react-router-dom'
 import { Toaster } from 'react-hot-toast'
 import Layout from './components/Layout'
 import HomePage from './pages/HomePage'
@@ -79,7 +79,9 @@ export default function App() {
           <Route path="customers" element={<ManageCustomers />} />
           <Route path="inquiries" element={<ManageInquiries />} />
           {/* Content */}
-          <Route path="hero" element={<ManageHero />} />
+          <Route path="hero" element={<Navigate to="/admin/banners/desktop" replace />} />
+          <Route path="banners/desktop" element={<ManageHero key="desktop" bannerType="desktop" />} />
+          <Route path="banners/mobile" element={<ManageHero key="mobile" bannerType="mobile" />} />
           <Route path="gallery-banner" element={<ManageGalleryBanner />} />
           <Route path="gallery-categories" element={<ManageGalleryCategories />} />
           <Route path="why-us" element={<ManageWhyUs />} />

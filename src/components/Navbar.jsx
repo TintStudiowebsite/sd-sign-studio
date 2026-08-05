@@ -149,7 +149,7 @@ export default function Navbar() {
         <div className="nav-inner">
           <Link to="/" className="nav-logo">
             <img 
-              src="/images/logo.png" 
+              src="/images/client-images/Navbar-horizontal.jpeg"
               alt="SD Sign Studio" 
               className="logo-img-desktop"
             />

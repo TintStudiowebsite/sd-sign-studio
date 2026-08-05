@@ -33,7 +33,14 @@ const NAV_GROUPS = [
   {
     label: 'Content',
     items: [
-      { name: 'Hero Banner', path: '/admin/hero', icon: 'seo' },
+      {
+        name: 'Banner Management',
+        icon: 'photo',
+        children: [
+          { name: 'Desktop Banner', path: '/admin/banners/desktop' },
+          { name: 'Mobile Banner', path: '/admin/banners/mobile' },
+        ],
+      },
       { name: 'Gallery Banner', path: '/admin/gallery-banner', icon: 'photo' },
       { name: 'Gallery Categories', path: '/admin/gallery-categories', icon: 'categories' },
       { name: 'Why Us Section', path: '/admin/why-us', icon: 'about' },
@@ -58,7 +65,9 @@ const NAV_GROUPS = [
 
 const PAGE_TITLES = {
   '/admin': 'Dashboard',
-  '/admin/hero': 'Hero Banner',
+  '/admin/hero': 'Desktop Banner',
+  '/admin/banners/desktop': 'Desktop Banner',
+  '/admin/banners/mobile': 'Mobile Banner',
   '/admin/gallery-banner': 'Gallery Banner',
   '/admin/gallery-categories': 'Gallery Categories',
   '/admin/why-us': 'Why Us Section',
@@ -226,14 +235,6 @@ export default function AdminLayout() {
     toast.success('Logged out successfully')
     navigate('/')
   }
-
-  const pageTitle = (() => {
-    const path = location.pathname
-    if (PAGE_TITLES[path]) return PAGE_TITLES[path]
-    if (path.includes('/admin/products/edit/')) return 'Edit Product'
-    if (path.includes('/admin/services/edit/')) return 'Edit Service'
-    return 'Admin'
-  })()
 
   const userInitial = user?.email?.[0]?.toUpperCase() || 'A'
 

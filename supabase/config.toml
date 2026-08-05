@@ -1,0 +1,2 @@
+[functions.banner-media]
+verify_jwt = true

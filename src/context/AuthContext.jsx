@@ -54,13 +54,11 @@ export function AuthProvider({ children }) {
     }
   }
 
-  const adminEmail = import.meta.env.VITE_ADMIN_EMAIL
-
   const value = {
     user,
     role,
     loading,
-    isAdmin: role === 'admin' || (user?.email && user.email === adminEmail)
+    isAdmin: role === 'admin'
   }
 
   return (

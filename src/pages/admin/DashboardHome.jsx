@@ -19,6 +19,8 @@ const QUICK_ACTIONS = [
   { label: 'Add Product',    path: '/admin/products/new', icon: 'products', color: '#3b82f6', bg: '#eff6ff' },
   { label: 'Add Service',    path: '/admin/services/new', icon: 'services',  color: '#8b5cf6', bg: '#f5f3ff' },
   { label: 'View Inquiries', path: '/admin/inquiries',    icon: 'inquiries', color: '#E8000D', bg: '#fff1f2' },
+  { label: 'Desktop Banner', path: '/admin/banners/desktop', icon: 'photo', color: '#f97316', bg: '#fff7ed' },
+  { label: 'Mobile Banner',  path: '/admin/banners/mobile',  icon: 'photo', color: '#ec4899', bg: '#fdf2f8' },
   { label: 'SEO Settings',   path: '/admin/seo',          icon: 'seo',       color: '#10b981', bg: '#f0fdf4' },
 ]
 

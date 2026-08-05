@@ -1,64 +1,63 @@
-import { createClient } from '@supabase/supabase-js'
-import pg from 'pg'
-import dotenv from 'dotenv'
 import path from 'path'
 import { fileURLToPath } from 'url'
+import dotenv from 'dotenv'
+import pg from 'pg'
+import { createClient } from '@supabase/supabase-js'
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url))
-dotenv.config({ path: path.join(__dirname, '..', '.env') })
+const scriptDirectory = path.dirname(fileURLToPath(import.meta.url))
+dotenv.config({ path: path.join(scriptDirectory, '..', '.env') })
 
-const supabase = createClient(process.env.VITE_SUPABASE_URL, process.env.VITE_SUPABASE_ANON_KEY)
-const { Client } = pg
+const requiredEnvironment = [
+  'VITE_SUPABASE_URL',
+  'VITE_SUPABASE_ANON_KEY',
+  'DATABASE_URL',
+  'ADMIN_EMAIL',
+  'ADMIN_PASSWORD',
+]
 
-async function createAdmin() {
-  try {
-    // 1. Sign up the user
-    console.log('Signing up sdsignstudioadmin@gmail.com...')
-    const { data, error } = await supabase.auth.signUp({
-      email: 'sdsignstudioadmin@gmail.com',
-      password: 'SuperSecretPassword123!',
-    })
-
-    if (error) {
-      if (error.message.includes('User already registered')) {
-        console.log('User already registered. Proceeding to assign admin role...')
-      } else {
-        throw error
-      }
-    }
-
-    // Try to login to get the user ID if already registered
-    const { data: loginData, error: loginError } = await supabase.auth.signInWithPassword({
-      email: 'sdsignstudioadmin@gmail.com',
-      password: 'SuperSecretPassword123!'
-    })
-
-    if (loginError) throw loginError
-
-    const userId = loginData.user.id
-    console.log('User ID:', userId)
-
-    // 2. Add to user_roles table as 'admin'
-    const client = new Client({
-      connectionString: process.env.DATABASE_URL,
-    })
-    await client.connect()
-
-    await client.query(`
-      INSERT INTO user_roles (user_id, role)
-      VALUES ($1, 'admin')
-      ON CONFLICT (user_id) DO UPDATE SET role = 'admin'
-    `, [userId])
-
-    console.log('Admin role assigned successfully!')
-    console.log('Login Email: sdsignstudioadmin@gmail.com')
-    console.log('Login Password: SuperSecretPassword123!')
-
-    await client.end()
-
-  } catch (err) {
-    console.error('Error creating admin:', err)
-  }
+const missingEnvironment = requiredEnvironment.filter(key => !process.env[key])
+if (missingEnvironment.length > 0) {
+  throw new Error(`Missing required environment variables: ${missingEnvironment.join(', ')}`)
 }
 
-createAdmin()
+const supabase = createClient(
+  process.env.VITE_SUPABASE_URL,
+  process.env.VITE_SUPABASE_ANON_KEY
+)
+
+async function createAdmin() {
+  const email = process.env.ADMIN_EMAIL
+  const password = process.env.ADMIN_PASSWORD
+
+  const { error: signUpError } = await supabase.auth.signUp({ email, password })
+  if (signUpError && !signUpError.message.includes('User already registered')) {
+    throw new Error(`Admin sign-up failed: ${signUpError.message}`)
+  }
+
+  const { data: loginData, error: loginError } = await supabase.auth.signInWithPassword({
+    email,
+    password,
+  })
+  if (loginError) {
+    throw new Error(`Admin sign-in failed: ${loginError.message}`)
+  }
+
+  const client = new pg.Client({ connectionString: process.env.DATABASE_URL })
+  try {
+    await client.connect()
+    await client.query(`
+      insert into public.user_roles (user_id, role)
+      values ($1, 'admin')
+      on conflict (user_id) do update set role = 'admin'
+    `, [loginData.user.id])
+  } finally {
+    await client.end()
+  }
+
+  console.log('Administrator account and role are ready')
+}
+
+createAdmin().catch(error => {
+  console.error('Failed to create administrator:', error)
+  process.exit(1)
+})

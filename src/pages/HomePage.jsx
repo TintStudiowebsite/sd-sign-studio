@@ -13,11 +13,18 @@ import ContactForm from '../components/ContactForm'
 
 export default function HomePage() {
   useEffect(() => {
-    // Show pop up contact form after 6 seconds (every time user visits home page)
-    const timer = setTimeout(() => {
+    const openQuoteModal = () => {
       window.dispatchEvent(new Event('open-quote-modal'))
-    }, 6000)
-    return () => clearTimeout(timer)
+    }
+
+    // Defer the initial event until the shared modal has attached its listener.
+    const initialTimer = window.setTimeout(openQuoteModal, 0)
+    const repeatTimer = window.setTimeout(openQuoteModal, 3 * 60 * 1000)
+
+    return () => {
+      window.clearTimeout(initialTimer)
+      window.clearTimeout(repeatTimer)
+    }
   }, [])
 
   return (
