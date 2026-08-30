@@ -10,6 +10,7 @@ export const CONFIG = {
     facebook: "https://facebook.com",
     instagram: "https://instagram.com",
     youtube: "https://youtube.com",
+    tiktok: "https://tiktok.com",
     linkedin: "https://linkedin.com"
   }
 }

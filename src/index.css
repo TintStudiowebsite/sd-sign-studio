@@ -340,6 +340,43 @@
 .section { padding: 120px 24px; }
 .section-inner { max-width: 1200px; margin: 0 auto; }
 
+/* ── TESTIMONIALS + CONSULTATION (shared section, side-by-side) ── */
+.testimonials-consultation-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px;
+  /* Center the (shorter) testimonials column on the taller form column. */
+  align-items: center;
+}
+@media (max-width: 960px) {
+  .testimonials-consultation-grid { grid-template-columns: 1fr; gap: 64px; align-items: stretch; }
+}
+
+/* Continuous right-to-left testimonial ticker used in the compact
+   (side-by-side) layout — the strip scrolls on its own, no manual arrows. */
+.testimonial-marquee {
+  width: 100%;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 40px, #000 calc(100% - 40px), transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0, #000 40px, #000 calc(100% - 40px), transparent 100%);
+}
+.testimonial-marquee-track {
+  display: flex;
+  gap: 20px;
+  width: max-content;
+  animation: testimonial-marquee-scroll 26s linear infinite;
+}
+.testimonial-marquee:hover .testimonial-marquee-track {
+  animation-play-state: paused;
+}
+@keyframes testimonial-marquee-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .testimonial-marquee-track { animation: none; }
+}
+
 /* ── POPULAR CATEGORIES ── */
 .categories-section { background: #ffffff; position: relative; border-top: 1.5px solid #e5e7eb; }
 .categories-section::before {

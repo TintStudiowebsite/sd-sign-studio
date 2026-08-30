@@ -140,7 +140,7 @@ export default function ContactForm({ isHome = false, theme = 'dark', onSuccess 
           }
           return updated
         })
-      } catch (err) {
+      } catch {
         setFiles(prev => {
           const updated = [...prev]
           if (updated[fileIndex]) {
@@ -210,7 +210,7 @@ export default function ContactForm({ isHome = false, theme = 'dark', onSuccess 
 
   return (
     <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-      <div style={{ display: 'grid', gridTemplateColumns: (isHome && !isMobile) ? '1fr 1fr' : '1fr', gap: '16px' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
         <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: '16px' }}>
           <div>
             <label style={lblStyle}>First Name *</label>
@@ -272,7 +272,7 @@ export default function ContactForm({ isHome = false, theme = 'dark', onSuccess 
         </div>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: (isHome && !isMobile) ? '1fr 1fr' : '1fr', gap: '16px' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
         <div>
           <label style={lblStyle}>Service Interested In</label>
           <select

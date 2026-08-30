@@ -17,8 +17,8 @@ export const BANNER_TYPE_CONFIG = Object.freeze({
   }),
 })
 
-const DEFAULT_HEADLINE = 'We design, print, and install your brand everywhere.'
-const DEFAULT_SUBHEADLINE = "Glasgow's premier vehicle wrapping, storefront signage, and custom print fabrication agency. Built to make your brand unmissable."
+const DEFAULT_HEADLINE = 'Make Your Brand Impossible To Miss.'
+const DEFAULT_SUBHEADLINE = 'Professional Vehicle Branding, Signage & Graphics for Businesses Across the UK.'
 
 export function createEmptyBannerSettings(bannerType) {
   const config = BANNER_TYPE_CONFIG[bannerType]
