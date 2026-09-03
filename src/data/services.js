@@ -25,13 +25,13 @@ export const STATIC_SERVICES = [
   { title: 'Projecting Signs & Lightboxes', short_description: 'High-impact projecting signs and lightboxes designed to ensure your business is seen from every angle.', image: '/images/NewProducts/projecting-signs.webp' },
   { title: 'Banner & Logo Printing', short_description: 'From banners to business cards, we deliver high-quality printing that represents your brand perfectly.', image: '/images/NewProducts/banner-logo-printing.webp' },
   { title: 'Safety & Interior Signs', short_description: 'Professional safety and interior signs to help you maintain a safe, organised and compliant environment.', image: '/images/NewProducts/safety-interrior-signs.webp' },
-  { title: 'Shop Awnings', short_description: 'Stylish branded awnings that protect your storefront and add a premium look to your business.', image: '/images/client-images/awnings.jpeg' },
-  { title: 'Custom Workwear', short_description: 'Professionally printed or embroidered branded workwear across our full clothing range.', image: '/images/client-images/van_wrapping.jpg' },
-  { title: 'Flyers & Brochures', short_description: 'Professional flyers and brochures that tell your brand story and drive real customer interest.', image: '/images/client-images/flyers.webp' },
-  { title: 'Exhibition Stands & Flags', short_description: 'Fully branded exhibition stands and feather flags tailored to your budget and space.', image: '/images/client-images/exhibition.jpeg' },
-  { title: 'Menu Displays', short_description: 'Custom-designed menu boards that highlight your offerings and elevate your venue\'s look.', image: '/images/client-images/WhatsApp Image 2026-05-17 at 11.20.17 PM (2).jpeg' },
+  { title: 'Shop Awnings', short_description: 'Stylish branded awnings that protect your storefront and add a premium look to your business.', image: '/images/services/shop-awnings.webp' },
+  { title: 'Custom Workwear', short_description: 'Professionally printed or embroidered branded workwear across our full clothing range.', image: '/images/services/custom-workwear.webp' },
+  { title: 'Flyers & Brochures', short_description: 'Professional flyers and brochures that tell your brand story and drive real customer interest.', image: '/images/services/flyers-and-brochures.webp' },
+  { title: 'Exhibition Stands & Flags', short_description: 'Fully branded exhibition stands and feather flags tailored to your budget and space.', image: '/images/services/exhibition-stands-and-flags.webp' },
+  { title: 'Menu Displays', short_description: 'Custom-designed menu boards that highlight your offerings and elevate your venue\'s look.', image: '/images/services/menu-displays.webp' },
   { title: 'Food Truck/Trailer Wraps', short_description: 'Bold food trailer wraps and signage that make your mobile business impossible to miss.', image: '/images/client-images/WhatsApp Image 2026-05-17 at 11.20.18 PM.jpeg' },
-  { title: 'Heras Fence Banners', short_description: 'Turn construction site hoardings into powerful brand advertising visible to thousands daily.', image: '/images/client-images/car2.jpg' },
+  { title: 'Heras Fence Banners', short_description: 'Turn construction site hoardings into powerful brand advertising visible to thousands daily.', image: '/images/services/heras-fence-banners.webp' },
 ]
 
 export const SERVICE_ICONS = [

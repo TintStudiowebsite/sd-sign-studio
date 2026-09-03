@@ -135,8 +135,8 @@ function FeatureGridMobile() {
           <span style={{ width: '42px', height: '42px', borderRadius: '50%', background: 'rgba(232,0,13,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--red)', marginBottom: '12px' }}>
             <FeatureIcon name={card.icon} size={19} />
           </span>
-          <div style={{ fontSize: '13px', fontWeight: 800, color: '#0a0a0a', marginBottom: '6px' }}>{card.title}</div>
-          <p style={{ fontSize: '12px', color: 'rgba(0,0,0,0.55)', lineHeight: 1.5, margin: '0 0 10px' }}>{card.desc}</p>
+          <div style={{ fontSize: '16px', fontWeight: 800, color: '#0a0a0a', marginBottom: '6px' }}>{card.title}</div>
+          <p style={{ fontSize: '14px', color: 'rgba(0,0,0,0.55)', lineHeight: 1.5, margin: '0 0 10px' }}>{card.desc}</p>
           <span style={{ display: 'block', width: '22px', height: '3px', borderRadius: '2px', background: 'var(--red)' }} />
         </div>
       ))}
@@ -146,14 +146,14 @@ function FeatureGridMobile() {
 
 function FeatureBarDesktop() {
   return (
-    <div style={{ position: 'relative', zIndex: 5, maxWidth: '1160px', margin: '-58px auto 0', background: '#fff', borderRadius: '20px', boxShadow: '0 24px 50px rgba(0,0,0,0.2)', display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', padding: '32px 8px' }}>
+    <div style={{ position: 'relative', zIndex: 5, maxWidth: 'calc(var(--content-w) - 40px)', margin: '-58px auto 0', background: '#fff', borderRadius: '20px', boxShadow: '0 24px 50px rgba(0,0,0,0.2)', display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', padding: '32px 8px' }}>
       {FEATURE_CARDS.map((card, index) => (
         <div key={card.title} style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '10px', padding: '0 28px', borderLeft: index === 0 ? 'none' : '1px solid rgba(0,0,0,0.08)' }}>
           <span style={{ width: '46px', height: '46px', borderRadius: '50%', background: 'rgba(232,0,13,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--red)' }}>
             <FeatureIcon name={card.icon} size={21} />
           </span>
-          <div style={{ fontSize: '14px', fontWeight: 800, color: '#0a0a0a' }}>{card.title}</div>
-          <p style={{ fontSize: '12.5px', color: 'rgba(0,0,0,0.55)', lineHeight: 1.55, margin: 0 }}>{card.desc}</p>
+          <div style={{ fontSize: '20px', fontWeight: 800, color: '#0a0a0a' }}>{card.title}</div>
+          <p style={{ fontSize: '18px', color: 'rgba(0,0,0,0.55)', lineHeight: 1.55, margin: 0 }}>{card.desc}</p>
           <span style={{ display: 'block', width: '22px', height: '3px', borderRadius: '2px', background: 'var(--red)' }} />
         </div>
       ))}
@@ -361,7 +361,7 @@ function DesktopBanner({ settings, onMediaError }) {
         <div style={{ position: 'absolute', inset: 0, zIndex: 2, background: 'linear-gradient(90deg, rgba(5,5,5,0.94) 0%, rgba(5,5,5,0.8) 32%, rgba(5,5,5,0.4) 62%, rgba(5,5,5,0.12) 100%)' }} />
         <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: '4px', background: 'linear-gradient(to right, var(--red), #ff4d4d, var(--red))', zIndex: 4 }} />
 
-        <div style={{ position: 'relative', zIndex: 3, width: '100%', maxWidth: '1200px', margin: '0 auto', padding: '40px clamp(24px, 6vw, 64px)', color: '#fff' }}>
+        <div style={{ position: 'relative', zIndex: 3, width: '100%', maxWidth: 'var(--content-w)', margin: '0 auto', padding: '40px var(--content-px)', color: '#fff' }}>
           <div style={{ maxWidth: '620px' }}>
             <EyebrowBadge />
             <h1 style={{ fontWeight: 900, fontSize: 'clamp(40px, 5vw, 62px)', lineHeight: 1.08, letterSpacing: '-1.5px', textTransform: 'uppercase', margin: '18px 0 22px' }}>

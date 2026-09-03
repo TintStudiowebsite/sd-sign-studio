@@ -1,8 +1,10 @@
 export const filterCategories = [
   'All',
-  'Audi', 'BMW', 'Mercedes Benz', 'Porsche', 'Land Rover',
-  'Volkswagen', 'Toyota', 'Hyundai', 'Kia', 'Mini',
-  'Jaguar', 'Volvo', 'Bentley', 'Maserati',
+  'Audi', 'Bentley', 'BMW', 'BYD', 'Hyundai',
+  'Jaguar', 'Jeep', 'Kia', 'Land Rover', 'Lexus',
+  'Mahindra', 'Maruti Suzuki', 'Maserati', 'Mercedes Benz', 'MG',
+  'Mini', 'Porsche', 'Renault', 'Skoda', 'Tata',
+  'Toyota', 'Vinfast', 'Volkswagen', 'Volvo'
 ]
 
 export const products = [

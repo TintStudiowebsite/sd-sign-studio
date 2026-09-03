@@ -12,20 +12,7 @@ import TestimonialsSection from '../components/home/TestimonialsSection'
 import ContactForm from '../components/ContactForm'
 
 export default function HomePage() {
-  useEffect(() => {
-    const openQuoteModal = () => {
-      window.dispatchEvent(new Event('open-quote-modal'))
-    }
 
-    // Defer the initial event until the shared modal has attached its listener.
-    const initialTimer = window.setTimeout(openQuoteModal, 0)
-    const repeatTimer = window.setTimeout(openQuoteModal, 3 * 60 * 1000)
-
-    return () => {
-      window.clearTimeout(initialTimer)
-      window.clearTimeout(repeatTimer)
-    }
-  }, [])
 
   return (
     <>

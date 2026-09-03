@@ -9,7 +9,7 @@ const inputStyle = { width: '100%', padding: '10px 14px', border: '1.5px solid #
 const labelStyle = { display: 'block', fontSize: '13px', fontWeight: 700, color: '#374151', marginBottom: '6px' }
 const hint = { fontSize: '11px', color: '#9ca3af', marginTop: '4px' }
 
-const CLOUD_NAME = 'dagbxhqod'
+const CLOUD_NAME = 'hpdgdpxp'
 const UPLOAD_PRESET = 'sd_sign_preset'
 
 const EMPTY_FORM = {

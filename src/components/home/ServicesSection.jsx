@@ -1,4 +1,4 @@
-﻿import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { Star } from 'lucide-react'
 import { STATIC_SERVICES, slugify, getServiceIcon } from '../../data/services'
 import { useServices } from '../../hooks/useServices'
@@ -46,9 +46,8 @@ export default function ServicesSection() {
                 <div className="srv-content">
                   <h3 className="srv-title">{srv.title}</h3>
                   <p className="srv-desc">{srv.short_description || srv.description}</p>
-                  <span className="srv-link">
+                  <span className="btn-red" style={{ alignSelf: 'flex-start', padding: '10px 20px', fontSize: '14px' }}>
                     Explore Service
-                    <span className="srv-link-arrow" aria-hidden="true">→</span>
                   </span>
                 </div>
               </article>

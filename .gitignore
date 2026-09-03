@@ -26,6 +26,10 @@ public/gallery-media/images/*
 public/gallery-media/videos/*
 !public/gallery-media/videos/.gitkeep
 
+# Local-only source media for one-off import/upload scripts (kept on Cloudinary)
+Product Catalog/
+services-replace/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

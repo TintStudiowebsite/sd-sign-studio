@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { supabase } from '../../lib/supabase'
 import { HOME_GALLERY_PREVIEW } from '../../data/galleryMedia'
+import AutoplayVideo from '../AutoplayVideo'
 
 const getMediaUrl = (item) => item.src || item.image || item.media_url
 const getMediaType = (item) => {
@@ -24,22 +25,7 @@ function PreviewCard({ item, index, onOpen }) {
     >
       <div className="gallery-preview-media">
         {isVideo ? (
-          <>
-            <video
-              src={mediaUrl}
-              poster={item.fallback}
-              muted
-              loop
-              playsInline
-              autoPlay
-              preload="metadata"
-              onError={(e) => {
-                e.currentTarget.style.display = 'none'
-                e.currentTarget.nextElementSibling.style.display = 'block'
-              }}
-            />
-            <img src={item.fallback} alt="" style={{ display: 'none' }} />
-          </>
+          <AutoplayVideo src={mediaUrl} poster={item.fallback} />
         ) : (
           <img src={mediaUrl || item.fallback} alt="" />
         )}
@@ -63,6 +49,7 @@ export default function GalleryPreview() {
       const { data } = await supabase
         .from('gallery')
         .select('*')
+        .eq('media_type', 'video')
         .order('created_at', { ascending: false })
         .limit(4)
 

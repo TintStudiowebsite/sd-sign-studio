@@ -1,4 +1,4 @@
-const CLOUD = 'dagbxhqod'
+const CLOUD = 'hpdgdpxp'
 const PRESET = 'sd_sign_preset'
 
 export async function uploadToCloudinary(file, options = {}) {

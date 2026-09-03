@@ -12,6 +12,37 @@ export default function QuoteModal() {
   }, [])
 
   useEffect(() => {
+    const threeMinutes = 3 * 60 * 1000
+    const now = Date.now()
+    
+    let firstVisit = sessionStorage.getItem('sd_first_visit')
+    if (!firstVisit) {
+      firstVisit = now.toString()
+      sessionStorage.setItem('sd_first_visit', firstVisit)
+    }
+    
+    const elapsed = now - parseInt(firstVisit, 10)
+    const alreadyShown = sessionStorage.getItem('sd_popup_shown')
+    
+    let timerId
+    if (!alreadyShown) {
+      if (elapsed >= threeMinutes) {
+        setIsOpen(true)
+        sessionStorage.setItem('sd_popup_shown', 'true')
+      } else {
+        timerId = setTimeout(() => {
+          setIsOpen(true)
+          sessionStorage.setItem('sd_popup_shown', 'true')
+        }, threeMinutes - elapsed)
+      }
+    }
+
+    return () => {
+      if (timerId) clearTimeout(timerId)
+    }
+  }, [])
+
+  useEffect(() => {
     if (!isOpen) return
     const handleKeyDown = (e) => {
       if (e.key === 'Escape') setIsOpen(false)

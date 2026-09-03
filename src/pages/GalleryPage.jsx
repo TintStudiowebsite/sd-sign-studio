@@ -3,6 +3,8 @@ import { useLocation } from 'react-router-dom'
 import { supabase } from '../lib/supabase'
 import CtaBand from '../components/home/CtaBand'
 import GalleryHeroBanner from '../components/gallery/GalleryHeroBanner'
+import AutoplayVideo from '../components/AutoplayVideo'
+import { cloudinaryVideoPoster } from '../lib/media'
 import { getGalleryCategories } from '../data/galleryCategoriesService'
 import { GALLERY_CATEGORY_ICONS } from '../data/galleryCategoryIcons'
 
@@ -17,13 +19,8 @@ const getMediaType = (item) => {
 function GalleryVideoThumb({ item }) {
   return (
     <div className="gallery-video-thumb">
-      <video
+      <AutoplayVideo
         src={getMediaUrl(item)}
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="auto"
         style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', transition: 'transform 0.4s ease' }}
       />
     </div>
@@ -283,8 +280,10 @@ export default function GalleryPage() {
               {getMediaType(selectedImage) === 'video' ? (
                 <video
                   src={getMediaUrl(selectedImage)}
+                  poster={cloudinaryVideoPoster(getMediaUrl(selectedImage))}
                   controls
                   autoPlay
+                  playsInline
                   style={{ width: '100%', maxHeight: '75vh', objectFit: 'contain', borderRadius: '8px', boxShadow: '0 10px 40px rgba(0,0,0,0.8)' }}
                 />
               ) : (
