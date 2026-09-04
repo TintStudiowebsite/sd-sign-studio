@@ -27,7 +27,7 @@ export default function ContactPage() {
       ),
       title: 'Phone Number',
       content: CONFIG.phone,
-      link: `tel:${CONFIG.phone.replace(/\s+/g, '')}`
+      link: `tel:${CONFIG.phoneE164}`
     },
     {
       icon: (

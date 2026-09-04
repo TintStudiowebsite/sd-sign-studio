@@ -4,6 +4,7 @@ import { supabase } from '../lib/supabase'
 import { products as dummyProducts } from '../data/products'
 import { useCart } from '../context/CartContext'
 import { formatProductPrice, useCountry } from '../context/CountryContext'
+import { CONFIG } from '../data/config'
 
 const TABS = ['Overview', 'Specifications', 'Why Choose Us']
 
@@ -75,7 +76,7 @@ export default function ProductDetailPage() {
   )
 
   const whatsappMessage = encodeURIComponent(`Hi, I'm interested in the ${product.name}. Could I get more information?`)
-  const whatsappUrl = `https://wa.me/919676112750?text=${whatsappMessage}`
+  const whatsappUrl = `${CONFIG.whatsapp}?text=${whatsappMessage}`
   const descText = product.full_description || product.longDescription || product.description || product.shortDescription || ''
 
   const allSpecs = [

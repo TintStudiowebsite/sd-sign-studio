@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useCart } from '../context/CartContext'
 import { formatCurrency, getProductPrice, useCountry } from '../context/CountryContext'
+import { CONFIG } from '../data/config'
 
 export default function CartPage() {
   const { cartItems, updateQuantity, removeFromCart } = useCart()
@@ -24,7 +25,7 @@ export default function CartPage() {
 
     text += `\n*Total Estimate: ${formatCurrency(cartTotal, country.code)}*\n\nPlease let me know the next steps to confirm my booking.`
 
-    const whatsappUrl = `https://wa.me/919676112750?text=${encodeURIComponent(text)}`
+    const whatsappUrl = `${CONFIG.whatsapp}?text=${encodeURIComponent(text)}`
     window.open(whatsappUrl, '_blank')
   }
 

@@ -30,7 +30,8 @@ export default function Footer() {
               style={{ width: '100px', height: '100px', borderRadius: '50%', objectFit: 'cover', display: 'block' }} 
             />
           </div>
-          <p>Your one-stop solution for vehicle wraps, signage, printing and branding. We turn ideas into powerful visual identities.</p>
+          <div className="footer-logo-text">SD <span className="red">SIGNS</span></div>
+          <p>Your one-stop solution for signage, vehicle branding, and printing. We turn ideas into powerful visual identities.</p>
           <div className="footer-socials">
             <a className="soc-btn" href={CONFIG.socials.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook">
               <SocialIcon name="facebook" />
@@ -62,7 +63,7 @@ export default function Footer() {
         <div className="footer-col">
           <h5>Our Services</h5>
           <ul>
-            <li><a href="#">Vehicle Wraps</a></li>
+            <li><a href="#">Vehicle branding</a></li>
             <li><a href="#">Commercial Signage</a></li>
             <li><a href="#">Window Graphics</a></li>
             <li><a href="#">Business Printing</a></li>
@@ -75,25 +76,26 @@ export default function Footer() {
           <h5>Contact Us</h5>
           <div className="contact-item">
             <span className="icon">📞</span>
-            <span>07715 669 077</span>
+            <span>{CONFIG.phone}</span>
           </div>
           <div className="contact-item">
             <span className="icon">✉️</span>
-            <span>info@sdsignstudio.com</span>
+            <span>{CONFIG.email}</span>
           </div>
           <div className="contact-item">
             <span className="icon">📍</span>
-            <span>123 Studio Road, Glasgow, G12 8QQ</span>
+            <span>{CONFIG.address}</span>
           </div>
           <div className="contact-item">
             <span className="icon">🕐</span>
-            <span>Mon - Sat: 9:00 AM – 6:00 PM</span>
+            <span>{CONFIG.openingHours}</span>
           </div>
           <div className="map-wrap">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d143634.34005886476!2d-4.390500186106602!3d55.85536551152062!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x488815562056ceeb%3A0x71e683b805ef511e!2sGlasgow!5e0!3m2!1sen!2suk!4v1717277684000!5m2!1sen!2suk"
+              src={CONFIG.mapsEmbedUrl}
               loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
+              referrerPolicy="strict-origin-when-cross-origin"
+              allowFullScreen
             ></iframe>
           </div>
         </div>
