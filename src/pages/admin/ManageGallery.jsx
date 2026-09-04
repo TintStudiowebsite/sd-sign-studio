@@ -241,6 +241,11 @@ export default function ManageGallery() {
                     <span style={{ fontSize: '11px', color: '#9ca3af' }}>Uploads to Cloudinary gallery folders</span>
                   </div>
                 </div>
+                <div style={{ fontSize: '11px', color: '#6b7280', lineHeight: 1.6 }}>
+                  <strong style={{ color: '#374151' }}>Supported formats:</strong> Images — JPG, PNG, WEBP, GIF. Videos — MP4, MOV, WEBM.
+                  <br />
+                  <strong style={{ color: '#b91c1c' }}>Video tip:</strong> Record with phone camera in <strong>normal mode</strong>, not HDR mode. HDR videos don't play in most browsers.
+                </div>
               </div>
             </div>
 

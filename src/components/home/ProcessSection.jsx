@@ -21,23 +21,29 @@ const steps = [
 
 export default function ProcessSection() {
   return (
-    <section className="process-section">
+    <section className="process-section" id="process">
       <div className="process-inner">
-        <div className="section-header">
+        <div className="section-header process-header">
           <span className="section-eyebrow">Our Workflow</span>
           <h2 className="section-title">The SD Sign <span className="red">Process</span></h2>
         </div>
-        {steps.map((step, i) => (
-          <div className="process-step" key={i}>
-            <img className="process-img" src={step.img} alt={step.title} />
-            <div>
-              <div className="step-number">{step.num}</div>
-              <h3 className="step-title">{step.title}</h3>
-              <p className="step-desc">{step.desc}</p>
+        <div className="process-steps-list">
+          {steps.map((step, i) => (
+            <div className="process-step" key={i}>
+              <div className="process-img-wrap">
+                <img className="process-img" src={step.img} alt={step.title} loading="lazy" />
+                <span className="step-badge-overlay">Step {step.num}</span>
+              </div>
+              <div className="process-step-content">
+                <div className="step-number">{step.num}</div>
+                <h3 className="step-title">{step.title}</h3>
+                <p className="step-desc">{step.desc}</p>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </section>
   )
 }
+

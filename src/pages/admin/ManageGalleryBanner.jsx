@@ -9,6 +9,7 @@ const inputStyle = { width: '100%', padding: '10px 14px', border: '1.5px solid #
 const labelStyle = { display: 'block', fontSize: '13px', fontWeight: 700, color: '#374151', marginBottom: '6px' }
 
 const isVideoUrl = (url) => /\.(mp4|webm|ogg|mov)$/i.test(url || '') || (url || '').includes('/video/')
+const getSlideUrl = (slide) => (typeof slide === 'string' ? slide : slide?.image || '')
 
 function MediaPreview({ url }) {
   if (!url) {
@@ -165,7 +166,7 @@ export default function ManageGalleryBanner() {
 
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))', gap: '14px' }}>
                   {settings.slides.map((slide, idx) => {
-                    const mediaUrl = slide.image || slide
+                    const mediaUrl = getSlideUrl(slide)
                     return (
                       <div key={idx} style={{ background: '#fff', border: '1.5px solid #e5e7eb', borderRadius: '10px', padding: '10px' }}>
                         <div style={{ height: '110px', borderRadius: '8px', overflow: 'hidden', background: '#f3f4f6', marginBottom: '10px' }}>
@@ -206,7 +207,7 @@ export default function ManageGalleryBanner() {
         <div style={{ ...card, padding: '20px' }}>
           <h4 style={{ fontSize: '13px', fontWeight: 800, color: '#111827', marginBottom: '12px' }}>Public Banner Preview</h4>
           <div style={{ height: '230px', borderRadius: '10px', overflow: 'hidden', position: 'relative', background: '#111' }}>
-            <MediaPreview url={settings.mediaType === 'video' ? settings.videoUrl : (settings.slides[0]?.image || settings.slides[0])} />
+            <MediaPreview url={settings.mediaType === 'video' ? settings.videoUrl : getSlideUrl(settings.slides[0])} />
             <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.58)' }} />
             <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', textAlign: 'center', padding: '18px', color: '#fff' }}>
               <span style={{ fontSize: '10px', fontWeight: 900, letterSpacing: '1.5px', textTransform: 'uppercase', color: '#E8000D', marginBottom: '10px' }}>Project Gallery</span>

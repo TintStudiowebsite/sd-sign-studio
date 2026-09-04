@@ -10,6 +10,8 @@ const isVideoUrl = (url) => {
   return url.endsWith('.mp4') || url.endsWith('.webm') || url.endsWith('.ogg') || url.includes('video')
 }
 
+const getSlideUrl = (slide) => (typeof slide === 'string' ? slide : slide?.image || '')
+
 export default function GalleryHeroBanner() {
   const [settings, setSettings] = useState(getGalleryBannerSettings())
   const [activeMode, setActiveMode] = useState(() => settings.videoUrl ? 'video' : 'slideshow')
@@ -63,9 +65,9 @@ export default function GalleryHeroBanner() {
 
   useEffect(() => {
     if (activeMode === 'video') {
-      videoRefs.current[0]?.play().catch(() => {})
+      videoRefs.current[0]?.play().catch(() => { })
     } else {
-      videoRefs.current[currentSlide + 1]?.play().catch(() => {})
+      videoRefs.current[currentSlide + 1]?.play().catch(() => { })
     }
   }, [activeMode, currentSlide])
 
@@ -132,7 +134,8 @@ export default function GalleryHeroBanner() {
             )}
 
             {slides.map((slide, idx) => {
-              const mediaUrl = slide.image || slide
+              const mediaUrl = getSlideUrl(slide)
+              if (!mediaUrl) return null
               const active = activeMode === 'slideshow' && idx === currentSlide
               return isVideoUrl(mediaUrl) ? (
                 <video
@@ -250,7 +253,8 @@ export default function GalleryHeroBanner() {
         )}
 
         {slides.map((slide, idx) => {
-          const mediaUrl = slide.image || slide
+          const mediaUrl = getSlideUrl(slide)
+          if (!mediaUrl) return null
           const active = activeMode === 'slideshow' && idx === currentSlide
           return isVideoUrl(mediaUrl) ? (
             <video

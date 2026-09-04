@@ -143,102 +143,102 @@ export default function GalleryPage() {
 
         {/* Gallery Grid */}
         <div style={{ padding: '36px 24px 120px' }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-          {loading ? (
-            <div style={{ textAlign: 'center', color: 'var(--text-light)', padding: '60px' }}>Loading gallery...</div>
-          ) : (
-            <div className="gallery-media-grid">
-              {visibleItems.map(item => (
-                <div
-                   key={item.id}
-                   onClick={() => setSelectedImage(item)}
-                   style={{
-                     borderRadius: '12px',
-                     overflow: 'hidden',
-                     background: '#ffffff',
-                     border: '1.5px solid #e5e7eb',
-                     cursor: 'pointer',
-                     transition: 'all 0.3s ease',
-                     position: 'relative'
-                   }}
-                   onMouseEnter={(e) => {
-                     e.currentTarget.style.transform = 'translateY(-4px)'
-                     e.currentTarget.style.boxShadow = '0 12px 24px rgba(0,0,0,0.08)'
-                     const media = e.currentTarget.querySelector('img, .gallery-grid-media')
-                     if (media) media.style.transform = 'scale(1.04)'
-                   }}
-                   onMouseLeave={(e) => {
-                     e.currentTarget.style.transform = ''
-                     e.currentTarget.style.boxShadow = ''
-                     const media = e.currentTarget.querySelector('img, .gallery-grid-media')
-                     if (media) media.style.transform = ''
-                   }}
-                >
-                  <div style={{ overflow: 'hidden', position: 'relative', aspectRatio: '9/16' }}>
-                    {getMediaType(item) === 'video' ? (
-                      <GalleryVideoThumb item={item} />
-                    ) : (
-                      <img
-                        className="gallery-grid-media"
-                        src={getMediaUrl(item)}
-                        alt={item.title}
-                        loading="lazy"
-                        style={{
-                          width: '100%',
-                          height: '100%',
-                          objectFit: 'cover',
-                          transition: 'transform 0.4s ease'
-                        }}
-                      />
-                    )}
-                    {getMediaType(item) === 'video' && (
+          <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+            {loading ? (
+              <div style={{ textAlign: 'center', color: 'var(--text-light)', padding: '60px' }}>Loading gallery...</div>
+            ) : (
+              <div className="gallery-media-grid">
+                {visibleItems.map(item => (
+                  <div
+                    key={item.id}
+                    onClick={() => setSelectedImage(item)}
+                    style={{
+                      borderRadius: '12px',
+                      overflow: 'hidden',
+                      background: '#ffffff',
+                      border: '1.5px solid #e5e7eb',
+                      cursor: 'pointer',
+                      transition: 'all 0.3s ease',
+                      position: 'relative'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.transform = 'translateY(-4px)'
+                      e.currentTarget.style.boxShadow = '0 12px 24px rgba(0,0,0,0.08)'
+                      const media = e.currentTarget.querySelector('img, .gallery-grid-media')
+                      if (media) media.style.transform = 'scale(1.04)'
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.transform = ''
+                      e.currentTarget.style.boxShadow = ''
+                      const media = e.currentTarget.querySelector('img, .gallery-grid-media')
+                      if (media) media.style.transform = ''
+                    }}
+                  >
+                    <div style={{ overflow: 'hidden', position: 'relative', aspectRatio: '9/16' }}>
+                      {getMediaType(item) === 'video' ? (
+                        <GalleryVideoThumb item={item} />
+                      ) : (
+                        <img
+                          className="gallery-grid-media"
+                          src={getMediaUrl(item)}
+                          alt={item.title}
+                          loading="lazy"
+                          style={{
+                            width: '100%',
+                            height: '100%',
+                            objectFit: 'cover',
+                            transition: 'transform 0.4s ease'
+                          }}
+                        />
+                      )}
+                      {getMediaType(item) === 'video' && (
+                        <div style={{
+                          position: 'absolute',
+                          top: '10px',
+                          right: '10px',
+                          background: 'rgba(0,0,0,0.68)',
+                          color: '#fff',
+                          borderRadius: '999px',
+                          padding: '5px 9px',
+                          fontSize: '10px',
+                          fontWeight: 900,
+                          letterSpacing: '1px',
+                          textTransform: 'uppercase'
+                        }}>
+                          Video
+                        </div>
+                      )}
                       <div style={{
                         position: 'absolute',
-                        top: '10px',
-                        right: '10px',
-                        background: 'rgba(0,0,0,0.68)',
-                        color: '#fff',
-                        borderRadius: '999px',
-                        padding: '5px 9px',
-                        fontSize: '10px',
-                        fontWeight: 900,
-                        letterSpacing: '1px',
-                        textTransform: 'uppercase'
-                      }}>
-                        Video
-                      </div>
-                    )}
-                    <div style={{
-                      position: 'absolute',
-                      inset: 0,
-                      background: 'rgba(232,0,13,0.1)',
-                      opacity: 0,
-                      transition: 'opacity 0.2s'
-                    }} className="hover-overlay" />
+                        inset: 0,
+                        background: 'rgba(232,0,13,0.1)',
+                        opacity: 0,
+                        transition: 'opacity 0.2s'
+                      }} className="hover-overlay" />
+                    </div>
+
                   </div>
-                  
-                </div>
-              ))}
-              {filteredItems.length === 0 && (
-                <div style={{ gridColumn: '1/-1', textAlign: 'center', color: 'var(--text-light)', padding: '60px 0' }}>
-                  No showcase items found for this category yet.
-                </div>
-              )}
-            </div>
-          )}
-          {!loading && visibleCount < filteredItems.length && (
-            <div style={{ display: 'flex', justifyContent: 'center', marginTop: '34px' }}>
-              <button
-                type="button"
-                className="btn-red"
-                onClick={() => setVisibleCount(prev => prev + GALLERY_PAGE_SIZE)}
-                style={{ border: 'none', cursor: 'pointer' }}
-              >
-                Load More
-              </button>
-            </div>
-          )}
-        </div>
+                ))}
+                {filteredItems.length === 0 && (
+                  <div style={{ gridColumn: '1/-1', textAlign: 'center', color: 'var(--text-light)', padding: '60px 0' }}>
+                    No showcase items found for this category yet.
+                  </div>
+                )}
+              </div>
+            )}
+            {!loading && visibleCount < filteredItems.length && (
+              <div style={{ display: 'flex', justifyContent: 'center', marginTop: '34px' }}>
+                <button
+                  type="button"
+                  className="btn-red"
+                  onClick={() => setVisibleCount(prev => prev + GALLERY_PAGE_SIZE)}
+                  style={{ border: 'none', cursor: 'pointer' }}
+                >
+                  Load More
+                </button>
+              </div>
+            )}
+          </div>
         </div>
 
         {/* Lightbox Zoom Modal */}
@@ -276,7 +276,7 @@ export default function GalleryPage() {
               >
                 &times;
               </button>
-              
+
               {getMediaType(selectedImage) === 'video' ? (
                 <video
                   src={getMediaUrl(selectedImage)}
@@ -293,7 +293,7 @@ export default function GalleryPage() {
                   style={{ width: '100%', maxHeight: '75vh', objectFit: 'contain', borderRadius: '8px', boxShadow: '0 10px 40px rgba(0,0,0,0.8)' }}
                 />
               )}
-              
+
             </div>
           </div>
         )}

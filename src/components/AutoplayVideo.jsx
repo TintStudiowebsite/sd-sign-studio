@@ -27,7 +27,7 @@ export default function AutoplayVideo({ src, poster, className, style, onError, 
 
     const tryPlay = () => {
       const p = el.play()
-      if (p && typeof p.catch === 'function') p.catch(() => {})
+      if (p && typeof p.catch === 'function') p.catch(() => { })
     }
 
     let observer
