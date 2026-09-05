@@ -9,7 +9,6 @@ import {
 import {
   MAX_MEDIA_ITEMS,
   assertBannerAspectRatio,
-  deleteBannerMedia,
   inspectBannerFile,
   uploadBannerMedia,
 } from '../../lib/bannerMedia'
@@ -171,7 +170,6 @@ export default function ManageHero({ bannerType }) {
   const [saving, setSaving] = useState(false)
   const [uploading, setUploading] = useState(false)
   const [selectedIndex, setSelectedIndex] = useState(0)
-  const [pendingDeletion, setPendingDeletion] = useState([])
 
   useEffect(() => {
     let cancelled = false
@@ -181,7 +179,6 @@ export default function ManageHero({ bannerType }) {
         if (cancelled) return
         setSettings(data)
         setSelectedIndex(0)
-        setPendingDeletion([])
       })
       .catch(error => {
         if (!cancelled) setLoadError(error.message)
@@ -210,15 +207,9 @@ export default function ManageHero({ bannerType }) {
     }))
   }
 
-  const queueForDeletion = media => {
-    setPendingDeletion(current => (
-      current.some(item => item.publicId === media.publicId) ? current : [...current, media]
-    ))
-  }
-
   const uploadFile = async file => {
     const inspection = await inspectBannerFile(file, bannerType)
-    return uploadBannerMedia(file, bannerType, inspection)
+    return uploadBannerMedia(inspection.file || file, bannerType, inspection)
   }
 
   const handleAddMedia = async event => {
@@ -260,7 +251,6 @@ export default function ManageHero({ bannerType }) {
 
     try {
       const replacement = await uploadFile(file)
-      const replacedMedia = settings.media[index]
       setSettings(current => ({
         ...current,
         media: current.media.map((item, itemIndex) => itemIndex === index
@@ -272,7 +262,6 @@ export default function ManageHero({ bannerType }) {
             }
           : item),
       }))
-      queueForDeletion(replacedMedia)
       setSelectedIndex(index)
       toast.success('Media replaced. Publish to make it live.', { id: 'banner-upload' })
     } catch (error) {
@@ -283,8 +272,6 @@ export default function ManageHero({ bannerType }) {
   }
 
   const handleRemoveMedia = index => {
-    const removedMedia = settings.media[index]
-    queueForDeletion(removedMedia)
     setSettings(current => ({
       ...current,
       media: current.media.filter((_, itemIndex) => itemIndex !== index),
@@ -339,27 +326,7 @@ export default function ManageHero({ bannerType }) {
     try {
       const savedSettings = await saveHeroSettings(settings)
       setSettings(savedSettings)
-
-      const deletionResults = await Promise.allSettled(
-        pendingDeletion.map(media => deleteBannerMedia(media, bannerType))
-      )
-      const failedDeletions = deletionResults.flatMap((result, index) => (
-        result.status === 'rejected' ? [pendingDeletion[index]] : []
-      ))
-      setPendingDeletion(failedDeletions)
-
-      if (failedDeletions.length > 0) {
-        console.warn('Published banner has Cloudinary assets pending cleanup', {
-          bannerType,
-          failedDeletions,
-        })
-        toast.error(
-          `Banner published, but ${failedDeletions.length} old Cloudinary asset(s) could not be removed.`,
-          { id: 'banner-save', duration: 7000 }
-        )
-      } else {
-        toast.success(`${config.label} published successfully`, { id: 'banner-save' })
-      }
+      toast.success(`${config.label} published successfully`, { id: 'banner-save' })
     } catch (error) {
       toast.error(error.message, { id: 'banner-save', duration: 7000 })
     } finally {
@@ -415,7 +382,7 @@ export default function ManageHero({ bannerType }) {
       <div>
         <h1 style={{ fontSize: '24px', fontWeight: 800, color: '#111827', margin: 0 }}>{config.label}</h1>
         <p style={{ fontSize: '14px', color: '#6b7280', marginTop: '4px' }}>
-          Upload images or videos in an exact {config.ratioLabel} ratio ({config.exampleSize} recommended). This media appears on {bannerType} devices only.
+          Upload any image (auto-cropped to {config.ratioLabel}) or a video already in an exact {config.ratioLabel} ratio ({config.exampleSize} recommended). This media appears on {bannerType} devices only.
         </p>
       </div>
 
@@ -463,6 +430,9 @@ export default function ManageHero({ bannerType }) {
               <div>
                 <h2 style={{ fontSize: '16px', fontWeight: 800, color: '#111827', margin: 0 }}>Banner Media ({settings.media.length}/{MAX_MEDIA_ITEMS})</h2>
                 <p style={{ fontSize: '12px', color: '#6b7280', margin: '4px 0 0' }}>Images and videos play in the order shown below.</p>
+                <p style={{ fontSize: '12px', color: '#6b7280', margin: '4px 0 0' }}>
+                  Images are automatically center-cropped to {config.ratioLabel}, any size works. Videos must already be recorded/exported in an exact {config.ratioLabel} ratio (e.g. {config.exampleSize}).
+                </p>
               </div>
 
               <input id={`add-${bannerType}-banner-media`} type="file" accept="image/*,video/*" onChange={handleAddMedia} disabled={uploading || settings.media.length >= MAX_MEDIA_ITEMS} style={{ display: 'none' }} />
